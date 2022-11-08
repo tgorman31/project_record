@@ -41,7 +41,7 @@ class _ProjectHomeState extends State<ProjectHome> {
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 4),
                       itemBuilder: (context, index) {
-                        return MyBox();
+                        return const MyBox();
                       },
                     ),
                   ),
