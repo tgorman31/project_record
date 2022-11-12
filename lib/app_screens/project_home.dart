@@ -13,6 +13,39 @@ class ProjectHome extends StatefulWidget {
 }
 
 class _ProjectHomeState extends State<ProjectHome> {
+  final List<Widget> _screens = [
+    // Content for Home tab
+    Container(
+      color: Colors.amber[500],
+      alignment: Alignment.center,
+      child: const Text(
+        'Home',
+        style: TextStyle(fontSize: 40),
+      ),
+    ), // Content for Home tab
+    Container(
+      color: Colors.blue[500],
+      alignment: Alignment.center,
+      child: const Text(
+        'List',
+        style: TextStyle(fontSize: 40),
+      ),
+    ), // Content for Home tab
+    Container(
+      color: Colors.green[500],
+      alignment: Alignment.center,
+      child: const Text(
+        'Settings',
+        style: TextStyle(fontSize: 40),
+      ),
+    ),
+  ];
+
+  int _selectedIndex = 0;
+  NavigationRailLabelType labelType = NavigationRailLabelType.all;
+  bool showLeading = false;
+  bool showTrailing = false;
+  double groupAlignment = -1.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,76 +53,35 @@ class _ProjectHomeState extends State<ProjectHome> {
       // appBar: myAppBar,
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const MyNavRail(),
-          // open drawer
-          // myDrawer,
-
-          // first half of page
-          Expanded(
-            flex: 2,
-            child: Column(
-              children: [
-                // first 4 boxes in grid
-                AspectRatio(
-                  aspectRatio: 4,
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: GridView.builder(
-                      itemCount: 4,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 4),
-                      itemBuilder: (context, index) {
-                        return const MyBox();
-                      },
-                    ),
-                  ),
-                ),
-
-                // list of previous days
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: 7,
-                    itemBuilder: (context, index) {
-                      return const MyTile();
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-          // second half of page
-          Expanded(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 400,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.grey[400],
-                    ),
-                  ),
-                ),
-                // list of stuff
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.grey[200],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+        children: [_screens[_selectedIndex], navRailMethod()],
       ),
+    );
+  }
+
+  NavigationRail navRailMethod() {
+    return NavigationRail(
+      destinations: const <NavigationRailDestination>[
+        NavigationRailDestination(
+            icon: Icon(Icons.home_filled),
+            selectedIcon: Icon(Icons.home_filled, color: Colors.white),
+            label: Text('Home')),
+        NavigationRailDestination(
+            icon: Icon(Icons.list),
+            selectedIcon: Icon(Icons.list, color: Colors.white),
+            label: Text('Second')),
+        NavigationRailDestination(
+            icon: Icon(Icons.settings),
+            selectedIcon: Icon(Icons.settings, color: Colors.white),
+            label: Text('Third')),
+      ],
+      selectedIndex: _selectedIndex,
+      groupAlignment: groupAlignment,
+      onDestinationSelected: (int index) {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      labelType: labelType,
     );
   }
 }
