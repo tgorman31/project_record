@@ -1,9 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:project_record/app_screens/home_page.dart';
+import 'package:project_record/app_screens/list_page.dart';
+import 'package:project_record/app_screens/settings_page.dart';
 
 import '../constants.dart';
-import '../util/my_box.dart';
-import '../util/my_tile.dart';
-import '../util/nav_rail.dart';
 
 class ProjectHome extends StatefulWidget {
   const ProjectHome({super.key});
@@ -15,30 +16,10 @@ class ProjectHome extends StatefulWidget {
 class _ProjectHomeState extends State<ProjectHome> {
   final List<Widget> _screens = [
     // Content for Home tab
-    Container(
-      color: Colors.amber[500],
-      alignment: Alignment.center,
-      child: const Text(
-        'Home',
-        style: TextStyle(fontSize: 40),
-      ),
-    ), // Content for Home tab
-    Container(
-      color: Colors.blue[500],
-      alignment: Alignment.center,
-      child: const Text(
-        'List',
-        style: TextStyle(fontSize: 40),
-      ),
-    ), // Content for Home tab
-    Container(
-      color: Colors.green[500],
-      alignment: Alignment.center,
-      child: const Text(
-        'Settings',
-        style: TextStyle(fontSize: 40),
-      ),
-    ),
+
+    const HomePage(),
+    const ListPage(), // Content for List tab
+    const SettingsPage(),
   ];
 
   int _selectedIndex = 0;
@@ -53,7 +34,10 @@ class _ProjectHomeState extends State<ProjectHome> {
       // appBar: myAppBar,
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [_screens[_selectedIndex], navRailMethod()],
+        children: [
+          navRailMethod(),
+          Expanded(child: _screens[_selectedIndex]),
+        ],
       ),
     );
   }
