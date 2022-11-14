@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 // import 'responsive/desktop_body.dart';
-import 'app_screens/project_home.dart';
+import 'app_screens/project_main.dart';
 import 'responsive/mobile_body.dart';
 import 'responsive/responsive_layout.dart';
 import 'responsive/tablet_body.dart';
